@@ -7,8 +7,8 @@ public class User : BaseDomain
 {
     #region Properties
 
-    public new string Id { get; private set; }
-    public string UserName { get; set; }
+    public new string Id { get; private set; } = Guid.Empty.ToString();
+    public string UserName { get; set; } =  string.Empty;
     public string? EmailAddress { get; private set; }
     public string? Password { get; private set; }
     public string? PhoneNumber { get; private set; }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="protobuf-net" Version="3.2.56" />
+        <ProjectReference Include="..\BaseApplication\BaseApplication.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Enums\Enums.csproj" />
-        <ProjectReference Include="..\Common\Common.csproj" />
+        <Folder Include="Services\" />
+        <Folder Include="Validations\" />
     </ItemGroup>
 
 </Project>

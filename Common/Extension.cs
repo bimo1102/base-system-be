@@ -51,6 +51,7 @@ public static class Extension
         }
         catch (Exception e)
         {
+            Console.WriteLine($"Get display name failed: {e.Message}");
             return enumValue.AsEmptyString();
         }
     }
@@ -78,4 +79,61 @@ public static class Extension
     {
         return strings?.Length > 0 ? string.Join(",", strings) : string.Empty;
     }
+
+    #region Number / conversion
+
+    public static int AsInt(this object? item, int defaultInt = default)
+    {
+        if (item == null)
+        {
+            return defaultInt;
+        }
+
+        return int.TryParse(item.ToString(), out var result) ? result : defaultInt;
+    }
+
+    public static long AsLong(this object? item, long defaultLong = default)
+    {
+        if (item == null)
+        {
+            return defaultLong;
+        }
+
+        return long.TryParse(item.ToString(), out var result) ? result : defaultLong;
+    }
+
+    public static bool AsBool(this object? item, bool defaultBool = default)
+    {
+        if (item == null)
+        {
+            return defaultBool;
+        }
+
+        var text = item.ToString()?.Trim();
+        if (string.IsNullOrEmpty(text))
+        {
+            return defaultBool;
+        }
+
+        if (text is "1" or "true" or "True" or "TRUE" or "yes" or "Yes")
+        {
+            return true;
+        }
+
+        if (text is "0" or "false" or "False" or "FALSE" or "no" or "No")
+        {
+            return false;
+        }
+
+        return bool.TryParse(text, out var result) ? result : defaultBool;
+    }
+
+    /// <summary>Alias tương thích script TYT (AsEmpty ≈ AsEmptyString).</summary>
+    public static string AsEmpty(this object? item) => item.AsEmptyString();
+
+    public static string AsEmpty(this string? item) => item.AsEmptyString();
+
+    public static string AsString(this object? item) => item.AsEmptyString();
+
+    #endregion
 }
